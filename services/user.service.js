@@ -16,7 +16,6 @@ async function createUser(user) {
 			status: true,
 			message: 'succeeded',
 		};
-console.log(create);
 	} catch (err) {
 		console.error('Hata: Kullanıcı eklenemedi', err);
 	}
@@ -34,6 +33,17 @@ async function getAllUsers() {
 	} catch (err) {
 		return err;
 	}
+}
+
+async function listByUsers(param1,param2){
+
+	const results = await knex('books').orderBy(param, param2);
+
+	return {
+		status: true,
+		message: 'sorted by',
+		data: results,
+	};
 }
 
 async function updateUser(id, updates) {
@@ -62,9 +72,51 @@ async function deleteUser(id) {
 	}
 }
 
+async function searchUser(user) {
+//	let sql = 'SELECT `username` FROM users WHERE username = ? ';
+	const result2 = await db('users').where(user).select('username');
+
+	if (result2.length > 0) {
+		return {
+			status: false,
+			message: 'user already exist',
+		};
+	}
+
+
+	return {
+		status: true,
+		message: 'OK',
+		data: result2,
+	};
+}
+
+async function searchId(id){
+	const idSearch = db('users')
+		.select('*')
+		.where('id', id);
+
+	if (idSearch.length === 0) {
+		return {
+			status: false,
+			message: 'this id is not exist',
+			data: null,
+		};
+	}
+	return {
+		status: true,
+		message: '1 data found',
+		data: idSearch,
+	};
+}
+
+
 module.exports = {
 	createUser,
 	getAllUsers,
 	updateUser,
 	deleteUser,
+	searchUser,
+	listByUsers,
+	searchId,
 };
