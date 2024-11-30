@@ -5,6 +5,9 @@ const PASSWORD_REGEX = new RegExp(
 );
 
 const schema = Joi.object().keys({
+	name: Joi.string().alphanum().required(),
+	surname: Joi.string().alphanum().required(),
+	email: Joi.string().email(),
 	username: Joi.string().alphanum().required(),
 	password: Joi.string().pattern(PASSWORD_REGEX).min(3).required(),
 	role_id: Joi.string().required(),
@@ -19,7 +22,6 @@ async function validateRequest(body) {
 			error: result.error.details[0].message,
 		});
 	}
-	console.log(result);
 	return {
 		status: true,
 		message: 'OK',

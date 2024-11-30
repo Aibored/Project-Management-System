@@ -7,7 +7,7 @@ module.exports = app => {
 
 	router.post("/signup", user.userCreate);
 
-	router.get("/list", user.userList);
+	router.get("/", user.userList);
 
 	router.delete("/:id",user.userDelete);
 
@@ -15,5 +15,5 @@ module.exports = app => {
 
 	router.get("/login", control.authUser);
 
-	app.use('/user/', router);
+	app.use('/user', router);
 }

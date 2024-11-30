@@ -16,6 +16,12 @@ exports.userCreate = async (req, res) => {
 	};
 
 	const username = user.username;
+	const email = user.email;
+	const surname = user.surname;
+	const name = user.name;
+	const role_id = user.role_id;
+
+
 
 console.log(user);
 
@@ -28,7 +34,7 @@ console.log(user);
 		});
 	}
 
-	const search = await searchUser(username);
+	const search = await searchUser({name: name,surname: surname,email:email,username:username,password:passHash,role_id: role_id});
 
 	if (search.status === false) {
 
