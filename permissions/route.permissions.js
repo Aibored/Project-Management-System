@@ -27,6 +27,16 @@ const routePermissions = [
 		method: 'DELETE',
 		permissionId: 4,
 	},
+	{
+		path:'/tasks/create',
+		method:'POST',
+		permissionId: 5,
+	},
+	{
+		path:'/tasks/:id',
+		method:'PUT',
+		permissionId: 6,
+	}
 ];
 
 module.exports = routePermissions;

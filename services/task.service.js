@@ -21,5 +21,41 @@ async function taskCreate(task){
 	}
 }
 
+async function taskUpdate(id, updates){
+	try {
+		const count = await db('users').where({ id }).update(updates);
 
-module.exports = taskCreate;
+		return {
+			status: true,
+			message: 'updated',
+			data: null,
+		};
+	} catch (err) {
+		return err;
+	}
+
+}
+
+async function taskSearch(id){
+	const idSearch = db('tasks')
+		.select('*')
+		.where('id', id);
+
+	if (idSearch.length === 0) {
+		return {
+			status: false,
+			message: 'this id is not exist',
+			data: null,
+		};
+	}
+	return {
+		status: true,
+		message: '1 data found',
+		data: idSearch,
+	};
+}
+
+module.exports ={ taskCreate,
+taskUpdate,
+taskSearch
+};
