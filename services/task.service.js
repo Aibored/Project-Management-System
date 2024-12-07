@@ -1,7 +1,7 @@
 const { v4: uuidv4 } = require('uuid');
 const db = require('../configs/database.js');
 
-async function taskCreate(task){
+async function taskCreate(task) {
 	try {
 		const create = await db('tasks').insert(task);
 
@@ -21,7 +21,7 @@ async function taskCreate(task){
 	}
 }
 
-async function taskUpdate(id, updates){
+async function taskUpdate(id, updates) {
 	try {
 		const count = await db('users').where({ id }).update(updates);
 
@@ -36,8 +36,8 @@ async function taskUpdate(id, updates){
 
 }
 
-async function taskSearch(id){
-	const idSearch = db('tasks')
+async function taskSearch(id) {
+	const idSearch = await db('tasks')
 		.select('*')
 		.where('id', id);
 
@@ -45,7 +45,7 @@ async function taskSearch(id){
 		return {
 			status: false,
 			message: 'this id is not exist',
-			data: null,
+			data: idSearch,
 		};
 	}
 	return {
@@ -55,7 +55,48 @@ async function taskSearch(id){
 	};
 }
 
-module.exports ={ taskCreate,
-taskUpdate,
-taskSearch
+async function taskDelete(id) {
+	try {
+		const count = await db('tasks').where({ id }).del();
+		return {
+			status: true,
+			message: 'deleted',
+			data: null,
+		};
+	} catch (error) {
+		console.error('Hata: Kullanıcı silinemedi', error);
+	}
+}
+
+async function taskReadAll() {
+	try {
+		const users = await db('tasks').select('*');
+
+		return {
+			status: true,
+			message: 'there is a list of tasks that already created',
+			data: users,
+		};
+	} catch (err) {
+		return err;
+	}
+}
+
+async function taskReadBy(param1, param2) {
+	const results = await db('tasks').orderBy(param1, param2);
+
+	return {
+		status: true,
+		message: 'sorted by',
+		data: results,
+	};
+}
+
+module.exports = {
+	taskCreate,
+	taskUpdate,
+	taskSearch,
+	taskDelete,
+	taskReadBy,
+	taskReadAll,
 };

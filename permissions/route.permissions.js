@@ -36,6 +36,21 @@ const routePermissions = [
 		path:'/tasks/:id',
 		method:'PUT',
 		permissionId: 6,
+	},
+	{
+		path: '/tasks/:id',
+		method:'DELETE',
+		permissionId: 7,
+	},
+	{
+		path: '/tasks',
+		method: 'GET',
+		permissionId: 8,
+	},
+	{
+		path:'/tasks/:id',
+		method:'GET',
+		permissionId: 8,
 	}
 ];
 

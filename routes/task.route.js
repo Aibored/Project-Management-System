@@ -6,5 +6,11 @@ module.exports = app =>{
 
 	router.put("/:id", task.updateTask);
 
+	router.delete ("/:id", task.deleteTask);
+
+	router.get("/",task.listTask);
+
+	router.get("/:id",task.ReadTask);
+
 	app.use('/tasks',router);
 }

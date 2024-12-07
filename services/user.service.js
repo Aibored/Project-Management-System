@@ -37,7 +37,7 @@ async function getAllUsers() {
 
 async function listByUsers(param1,param2){
 
-	const results = await knex('books').orderBy(param, param2);
+	const results = await db('users').orderBy(param1, param2);
 
 	return {
 		status: true,
