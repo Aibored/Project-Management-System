@@ -51,7 +51,32 @@ const routePermissions = [
 		path:'/tasks/:id',
 		method:'GET',
 		permissionId: 8,
-	}
+	},
+	{
+		path:'/projects/:id',
+		method:'GET',
+		permissionId: 10,
+	},
+	{
+		path:'/projects/:id',
+		method:'PUT',
+		permissionId: 12,
+	},
+	{
+		path:'/projects/:id',
+		method:'DELETE',
+		permissionId: 11,
+	},
+	{
+		path:'/projects',
+		method:'POST',
+		permissionId: 9,
+	},
+	{
+		path:'/projects',
+		method:'GET',
+		permissionId: 10,
+	},
 ];
 
 module.exports = routePermissions;

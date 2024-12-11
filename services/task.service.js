@@ -23,7 +23,7 @@ async function taskCreate(task) {
 
 async function taskUpdate(id, updates) {
 	try {
-		const count = await db('users').where({ id }).update(updates);
+		const count = await db('tasks').where({ id }).update(updates);
 
 		return {
 			status: true,

@@ -82,6 +82,7 @@ app.get('/', async (req, res) => {
 
 require('./routes/user.route.js')(app);
 require('./routes/task.route.js')(app);
+require('./routes/project.route.js')(app);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
